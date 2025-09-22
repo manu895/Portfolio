@@ -5,7 +5,7 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    // Controlla il tema attuale
+    // tema attuale
     const currentTheme = document.documentElement.classList.contains('dark');
     setIsDark(currentTheme);
   }, []);

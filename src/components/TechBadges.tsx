@@ -8,11 +8,11 @@ interface TechItem {
   bgColor: string
   description: string
   category: 'frontend' | 'backend' | 'tools' | 'database'
-  proficiency: number // 1-5
+  proficiency: number 
 }
 
 const techStack: TechItem[] = [
-  // Frontend
+  
   { 
     name: 'React', 
     icon: '⚛️', 
@@ -174,9 +174,6 @@ export default function TechBadges() {
     ? techStack.filter(tech => tech.category === selectedCategory)
     : techStack
 
-  console.log('Selected category:', selectedCategory)
-  console.log('Filtered tech:', filteredTech)
-  console.log('All tech stack:', techStack)
 
   const renderProficiencyStars = (level: number) => {
     return Array.from({ length: 5 }, (_, i) => (

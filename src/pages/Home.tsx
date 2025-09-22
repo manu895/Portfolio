@@ -7,7 +7,7 @@ import TechBadges from '@/components/TechBadges'
 import { Seo } from '@/lib/seo'
 import { projects } from '@/data/projects'
 
-// Animazioni container
+// animazioni container
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -19,7 +19,7 @@ const containerVariants = {
   }
 }
 
-// Animazioni sezioni
+// animazioni sezioni
 const sectionVariants = {
   hidden: { 
     opacity: 0,
@@ -40,7 +40,7 @@ const sectionVariants = {
   }
 }
 
-// Animazione floating per elementi decorativi
+// animazione floating
 const floatingVariants = {
   animate: {
     y: [-10, 10, -10],
@@ -53,7 +53,7 @@ const floatingVariants = {
   }
 }
 
-// Animazione parallax per background
+// animazione parallax per background
 const parallaxVariants = {
   hidden: { scale: 1.1, opacity: 0 },
   visible: {

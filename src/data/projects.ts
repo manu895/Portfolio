@@ -39,7 +39,7 @@ export const projects: Project[] = [
     slug: 'ecommerce-sneakers',
     year: 2023,
     category: 'E-commerce',
-    stack: ['React', 'Tailwind', 'TS'],
+    stack: ['React', 'Tailwind', 'TS' , 'Bootstrap'],
     summary: 'Store e-commerce con carrello e checkout mock.',
     goals: ['UI responsive', 'SEO', 'Accessibilità'],
     process: ['Design system', 'Implementazione React', 'QA'],
@@ -51,11 +51,11 @@ export const projects: Project[] = [
   },
   {
     id: 'p3',
-    title: 'Landing Campagna',
+    title: 'Siti Vetrina',
     slug: 'landing-campagna',
     year: 2025,
     category: 'Landing',
-    stack: ['Vite', 'Tailwind'],
+    stack: ['Vite', 'Tailwind' , 'Javascript' , 'HTML'],
     summary: 'Landing page ad alto impatto con micro-interazioni.',
     goals: ['CTR alto', 'Above-the-fold leggero'],
     process: ['Copywriting', 'Animazioni', 'A/B test'],
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     slug: 'design-system-ui',
     year: 2022,
     category: 'Design System',
-    stack: ['React', 'TS'],
+    stack: ['React', 'TS' , 'Bootstrap' , 'Next JS', 'Lucide React'],
     summary: 'Libreria di componenti riutilizzabili e accessibili.',
     goals: ['Token design', 'Documentazione', 'Storybook'],
     process: ['Audit UI', 'Refactoring', 'Docs'],
@@ -86,13 +86,13 @@ export const projects: Project[] = [
     slug: 'App',
     year: 2021,
     category: 'Web App',
-    stack: ['React', 'TS'],
+    stack: ['React', 'TS' , 'React router' , 'Node Red'],
     summary: 'App veloci, efficienti e durature.',
     goals: ['Editor semplice', 'MDX-ready'],
     process: ['Schema contenuti', 'UI CRUD', 'Build statico'],
     results: ['Tempo di pubblicazione -60%'],
     images: [
-      { src: '/images/projects/project-8.jpg', alt: 'Editor contenuti' }
+      { src: '/images/projects/app.png', alt: 'Editor contenuti' }
     ]
   }
 ]

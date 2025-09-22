@@ -282,7 +282,7 @@ export default function Kpi() {
   )
 }
 
-// Componente per animazione conteggio numeri
+// animazione conteggio numeri
 function CountUpNumber({ target, delay = 0 }: { target: number; delay?: number }) {
   const [count, setCount] = useState(0)
 

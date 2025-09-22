@@ -1,4 +1,4 @@
-/* Minimal ESLint for React + TS */
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',

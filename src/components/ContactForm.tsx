@@ -18,7 +18,7 @@ export default function ContactForm() {
     setToast(null)
     try {
       await new Promise((res) => setTimeout(res, 800))
-      // success
+      
       setToast({ type: 'success', msg: 'Messaggio inviato! Ti risponderò presto.' })
       reset()
     } catch {

@@ -52,7 +52,7 @@ export default function Contact() {
   const y1 = useTransform(scrollY, [0, 300], [0, -50])
   const y2 = useTransform(scrollY, [0, 300], [0, -100])
 
-  // Funzione per scrollare al form
+  // scrollare al form
   const scrollToForm = () => {
     const formElement = document.getElementById('contact-form')
     if (formElement) {

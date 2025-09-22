@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Seo } from '@/lib/seo'
-import { 
-  Code2, 
-  Palette, 
-  Zap, 
-  Heart, 
-  Coffee, 
-  Lightbulb, 
-  Target, 
-  Users, 
+import {
+  Code2,
+  Palette,
+  Zap,
+  Heart,
+  Coffee,
+  Lightbulb,
+  Target,
+  Users,
   Award,
   Calendar,
   MapPin,
@@ -25,7 +25,7 @@ export default function About() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currentWord, setCurrentWord] = useState(0)
   const { scrollY } = useScroll()
-  
+
   // Parallax transforms
   const y1 = useTransform(scrollY, [0, 300], [0, -50])
   const y2 = useTransform(scrollY, [0, 300], [0, -100])
@@ -76,24 +76,24 @@ export default function About() {
   }
 
   const skills = [
-    { 
-      name: 'Frontend Development', 
-      level: 95, 
-      icon: Code2, 
+    {
+      name: 'Frontend Development',
+      level: 95,
+      icon: Code2,
       color: 'from-blue-500 to-cyan-500',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS']
     },
-    { 
-      name: 'UI/UX Design', 
-      level: 85, 
-      icon: Palette, 
+    {
+      name: 'UI/UX Design',
+      level: 85,
+      icon: Palette,
       color: 'from-purple-500 to-pink-500',
       tech: ['Figma', 'Adobe XD', 'Framer', 'Design Systems']
     },
-    { 
-      name: 'Backend Development', 
-      level: 80, 
-      icon: Zap, 
+    {
+      name: 'Backend Development',
+      level: 80,
+      icon: Zap,
       color: 'from-emerald-500 to-teal-500',
       tech: ['Node.js', 'Express', 'APIs', 'Database']
     }
@@ -121,7 +121,7 @@ export default function About() {
     {
       icon: Heart,
       title: 'Passione',
-      description: 'Il codice è la mia arte, ogni riga scritta con cura e dedizione.',
+      description: 'Il codice è  arte, ogni riga viene scritta con cura e dedizione.',
       color: 'from-pink-400 to-rose-500'
     }
   ]
@@ -136,10 +136,10 @@ export default function About() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <Seo title="Chi Sono" path="/about" />
-      
+
       {/* Enhanced Background */}
       <div className="fixed inset-0 -z-10">
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-30"
           animate={{
             background: [
@@ -156,7 +156,7 @@ export default function About() {
           }}
         />
 
-        <div 
+        <div
           className="absolute w-96 h-96 opacity-20 blur-3xl rounded-full pointer-events-none"
           style={{
             background: `conic-gradient(from 0deg at 50% 50%, 
@@ -171,7 +171,7 @@ export default function About() {
           }}
         />
 
-        <div 
+        <div
           className="absolute inset-0 opacity-5"
           style={{
             backgroundImage: `
@@ -197,7 +197,7 @@ export default function About() {
             className="relative order-2 lg:order-1"
             style={{ y: y1 }}
           >
-            <motion.div 
+            <motion.div
               className="relative mx-auto w-80 h-80"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -218,17 +218,17 @@ export default function About() {
                   ease: "easeInOut"
                 }}
               />
-              
+
               {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-purple-400/40 rounded-[40%_60%_60%_40%/60%_40%_60%_40%] blur-xl scale-110" />
-              
+
               {/* Main image */}
               <motion.img
                 src="/images/projects/fotomanu.jpg"
                 alt="Manuel Bologna - Frontend Developer"
                 className="absolute left-6 top-6 h-72 w-72 rounded-[40%_60%_60%_40%/60%_40%_60%_40%] object-cover border-2 border-white/20 shadow-2xl"
                 style={{ rotate }}
-                whileHover={{ 
+                whileHover={{
                   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
                   borderColor: "rgba(255, 255, 255, 0.4)"
                 }}
@@ -264,7 +264,7 @@ export default function About() {
           {/* Hero Content */}
           <motion.div variants={itemVariants} className="order-1 lg:order-2">
             <motion.div className="mb-6">
-              <motion.span 
+              <motion.span
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-medium text-blue-300"
                 whileHover={{ scale: 1.05 }}
               >
@@ -274,8 +274,8 @@ export default function About() {
             </motion.div>
 
             <h1 className="mb-6 text-4xl md:text-6xl font-bold leading-tight pb-3">
-              <span className="block text-blue-600 pb-3">Frontend</span>
-              <motion.span 
+              <span className="block text-blue-600 pb-3">Full-stack</span>
+              <motion.span
                 key={currentWord}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -287,23 +287,31 @@ export default function About() {
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Sono un web developer specializzato in <strong className="text-blue-300">React</strong> e UI moderne, 
-              con forte attenzione a <strong className="text-purple-300">performance</strong>, 
-              <strong className="text-cyan-300"> accessibilità</strong> e developer experience. 
+              Sono un web developer specializzato in <strong className="text-blue-300">React</strong> e UI moderne,
+              con forte attenzione a <strong className="text-purple-300">performance</strong>,
+              <strong className="text-cyan-300"> accessibilità</strong> e developer experience.
               Trasformo idee creative in esperienze digitali coinvolgenti.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8">
-              <motion.button
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 hover:shadow-lg transition-all duration-300"
+              <motion.a
+                href="/assets/cv/cv.pdf"
+                download="Manuel_Bologna_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 hover:shadow-lg transition-all duration-300 inline-flex no-underline"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Download size={20} />
                 Scarica CV
-              </motion.button>
+              </motion.a>
+              
               <motion.button
-                className="px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-medium flex items-center gap-2 hover:bg-white/20 transition-all duration-300"
+                className="px-6 py-3 bg-black/40 backdrop-blur-md border border-white/30 text-white rounded-xl font-medium flex items-center gap-2 hover:bg-black/50 transition-all duration-300 shadow-lg"
+                style={{
+                  textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)'
+                }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -316,7 +324,7 @@ export default function About() {
             <div className="flex flex-wrap gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                Milano, Italia
+                Piazza Armerina, Italia
               </div>
               <div className="flex items-center gap-2">
                 <Coffee size={16} />
@@ -347,7 +355,7 @@ export default function About() {
                     <stat.icon size={24} className="text-blue-400" />
                   </div>
                 </div>
-                <motion.div 
+                <motion.div
                   className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2"
                   initial={{ scale: 1 }}
                   whileInView={{ scale: [1, 1.1, 1] }}
@@ -369,7 +377,7 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-32"
         >
-          <motion.h2 
+          <motion.h2
             className="text-3xl md:text-4xl font-bold text-center mb-16 text-blue-600"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -435,7 +443,7 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-32"
         >
-          <motion.h2 
+          <motion.h2
             className="text-3xl md:text-4xl font-bold text-center mb-16 text-blue-600"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -483,13 +491,13 @@ export default function About() {
             >
               <Quote size={48} className="text-blue-400" />
             </motion.div>
-            
+
             <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-6">
               Pronto per il prossimo progetto?
             </h2>
-            
+
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Sono sempre interessato a nuove sfide e collaborazioni. 
+              Sono sempre interessato a nuove sfide e collaborazioni.
               Parliamo di come posso aiutarti a realizzare le tue idee!
             </p>
 
@@ -502,7 +510,7 @@ export default function About() {
                 <Mail size={20} />
                 Iniziamo a Collaborare
               </motion.button>
-              
+
               <motion.button
                 className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
