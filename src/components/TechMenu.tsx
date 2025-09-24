@@ -1,7 +1,6 @@
 import React from 'react'
 import { Code2, Palette, FileText, Github } from 'lucide-react'
 
-// Usando icone Lucide React disponibili nel progetto
 const techLinks = [
   { 
     key: 'html', 

@@ -86,7 +86,7 @@ export default function Services() {
       ],
       color: 'text-blue-400',
       bgColor: 'from-blue-500/20 to-cyan-500/20',
-      price: 'Da €2.500',
+      price: 'Da €1.500',
       popular: true
     },
     { 
@@ -102,7 +102,7 @@ export default function Services() {
       ],
       color: 'text-purple-400',
       bgColor: 'from-purple-500/20 to-pink-500/20',
-      price: 'Da €3.500'
+      price: 'Da €2.500'
     },
     { 
       title: 'Performance & SEO', 
@@ -117,7 +117,7 @@ export default function Services() {
       ],
       color: 'text-emerald-400',
       bgColor: 'from-emerald-500/20 to-teal-500/20',
-      price: 'Da €1.500'
+      price: 'Da €1.000'
     },
     { 
       title: 'UX/UI Design', 
@@ -132,7 +132,7 @@ export default function Services() {
       ],
       color: 'text-orange-400',
       bgColor: 'from-orange-500/20 to-red-500/20',
-      price: 'Da €2.000'
+      price: 'Da €1.500'
     }
   ]
 

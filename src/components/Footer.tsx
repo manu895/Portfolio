@@ -225,7 +225,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <motion.div variants={itemVariants}>
-              <h4 className="text-xl font-semibold mb-8 flex items-center gap-2">
+              <h4 className="text-xl font-semibold mb-8 flex items-center gap-2 text-yellow-400">
                 <Star size={20} className="text-yellow-400" />
                 Link Rapidi
               </h4>
@@ -252,7 +252,7 @@ export default function Footer() {
 
             {/* Services */}
             <motion.div variants={itemVariants}>
-              <h4 className="text-xl font-semibold mb-8 flex items-center gap-2">
+              <h4 className="text-xl font-semibold mb-8 flex items-center gap-2 text-blue-400">
                 <Zap size={20} className="text-blue-400" />
                 Servizi
               </h4>

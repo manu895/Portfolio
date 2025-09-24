@@ -44,6 +44,9 @@ export default function Header() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const location = useLocation()
 
+  // Helper per determinare se siamo nella Home
+  const isHomePage = location.pathname === '/'
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -62,6 +65,11 @@ export default function Header() {
     }
   }, [])
 
+  // Scroll to top quando cambia pagina
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [location.pathname])
+
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Progetti', path: '/projects' },
@@ -69,6 +77,30 @@ export default function Header() {
     { name: 'Servizi', path: '/services' },
     { name: 'Contatti', path: '/contact' }
   ]
+
+  // Funzione per ottenere il colore del testo dei nav items
+  const getNavItemColor = (itemPath: string) => {
+    const isActive = location.pathname === itemPath
+
+    // Se siamo nella Home
+    if (isHomePage) {
+      if (isActive) {
+        return isScrolled 
+          ? 'text-blue-600 dark:text-blue-400' // Attivo con scroll
+          : 'text-white' // Attivo senza scroll (bianco su sfondo scuro)
+      } else {
+        return isScrolled
+          ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400' // Non attivo con scroll
+          : 'text-white/90 hover:text-white' // Non attivo senza scroll (bianco su sfondo scuro)
+      }
+    } 
+    // Nelle altre pagine
+    else {
+      return isActive
+        ? 'text-blue-600 dark:text-blue-400'
+        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+    }
+  }
 
   const headerVariants = {
     initial: { y: -100, opacity: 0 },
@@ -245,10 +277,19 @@ export default function Header() {
                 className="group text-2xl font-bold relative overflow-hidden no-underline"
               >
                 <motion.span
-                  className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent bg-size-200 bg-pos-0 group-hover:bg-pos-100 transition-all duration-700"
+                  className={`
+                    bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent bg-size-200 bg-pos-0 group-hover:bg-pos-100 transition-all duration-700
+                    ${isHomePage && !isScrolled ? 'text-white' : ''}
+                  `}
                   whileHover={{
                     backgroundPosition: "100% 0%"
                   }}
+                  style={isHomePage && !isScrolled ? { 
+                    background: 'white', 
+                    WebkitBackgroundClip: 'text', 
+                    backgroundClip: 'text',
+                    color: 'white'
+                  } : {}}
                 >
                   Manuel Bologna
                 </motion.span>
@@ -283,11 +324,8 @@ export default function Header() {
                   <Link
                     to={item.path}
                     className={`
-                      relative px-3 py-2 text-sm font-medium transition-all duration-300 group no-underline
-                      ${location.pathname === item.path
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-                      }
+                      relative px-3 py-2 text-sm font-medium transition-all duration-700 group no-underline
+                      ${getNavItemColor(item.path)}
                     `}
                     style={{ textDecoration: 'none' }}
                   >
@@ -296,8 +334,13 @@ export default function Header() {
                     {/* Animated underline - solo per hover quando NON è attivo */}
                     {location.pathname !== item.path && (
                       <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 scale-x-0 group-hover:scale-x-100 origin-left"
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className={`
+                          absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 origin-left transition-all duration-700
+                          ${isHomePage && !isScrolled 
+                            ? 'bg-white' 
+                            : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                          }
+                        `}
                       />
                     )}
 
@@ -305,7 +348,13 @@ export default function Header() {
                     {location.pathname === item.path && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"
+                        className={`
+                          absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-700
+                          ${isHomePage && !isScrolled 
+                            ? 'bg-white' 
+                            : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                          }
+                        `}
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -336,8 +385,20 @@ export default function Header() {
                 }}
               />
 
-              <Sparkles size={16} className="text-blue-600 dark:text-blue-400" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <Sparkles size={16} className={`
+                transition-all duration-700
+                ${isHomePage && !isScrolled 
+                  ? 'text-white' 
+                  : 'text-blue-600 dark:text-blue-400'
+                }
+              `} />
+              <span className={`
+                text-sm font-medium transition-all duration-700
+                ${isHomePage && !isScrolled 
+                  ? 'text-white' 
+                  : 'text-gray-700 dark:text-gray-300'
+                }
+              `}>
                 Tech Stack
               </span>
 
@@ -348,7 +409,13 @@ export default function Header() {
             {/* Mobile menu button */}
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className={`
+                md:hidden p-2 transition-colors
+                ${isHomePage && !isScrolled
+                  ? 'text-white hover:text-white/80'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                }
+              `}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >

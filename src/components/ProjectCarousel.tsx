@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { projects } from '@/data/projects'
 import { ChevronLeft, ChevronRight, ExternalLink, Github, Play, ArrowRight } from 'lucide-react'
 
@@ -22,6 +22,7 @@ interface ProjectCarouselProps {
 export default function ProjectCarousel({ project, className }: ProjectCarouselProps) {
   const [currentProject, setCurrentProject] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -40,6 +41,19 @@ export default function ProjectCarousel({ project, className }: ProjectCarouselP
 
   const goToNext = () => {
     setCurrentProject((prev) => (prev + 1) % projects.length)
+  }
+
+  // Funzione per navigare alla pagina progetti con scroll to top
+  const goToProjectsPage = () => {
+    navigate('/projects')
+    // Scroll to top dopo la navigazione
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }, 100)
   }
 
   const currentProjectData = projects[currentProject]
@@ -319,7 +333,7 @@ export default function ProjectCarousel({ project, className }: ProjectCarouselP
             </div>
           </motion.div>
 
-          {/* Bottom CTA */}
+          {/* Bottom CTA - SCROLL TO TOP IMPLEMENTATO */}
           <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
@@ -327,16 +341,15 @@ export default function ProjectCarousel({ project, className }: ProjectCarouselP
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <Link to="/projects">
-              <motion.button
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Vedi Tutti i Progetti
-                <ArrowRight size={18} />
-              </motion.button>
-            </Link>
+            <motion.button
+              onClick={goToProjectsPage}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Vedi Tutti i Progetti
+              <ArrowRight size={18} />
+            </motion.button>
 
             <p className="text-gray-600 mt-4">
               Naviga tra i progetti usando le frecce o cliccando sulle anteprime

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { Link, useNavigate } from 'react-router-dom'
 import { Seo } from '@/lib/seo'
 import {
   Code2,
@@ -25,6 +26,7 @@ export default function About() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currentWord, setCurrentWord] = useState(0)
   const { scrollY } = useScroll()
+  const navigate = useNavigate()
 
   // Parallax transforms
   const y1 = useTransform(scrollY, [0, 300], [0, -50])
@@ -51,6 +53,35 @@ export default function About() {
       clearInterval(wordInterval)
     }
   }, [])
+
+  // Funzione per navigare ai contatti con scroll alle card
+  const goToContactCards = () => {
+    navigate('/contact')
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact-methods')
+      if (contactSection) {
+        contactSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        })
+      } else {
+        // Fallback scroll to top se non trova la sezione
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }, 100)
+  }
+
+  // Funzione per navigare ai progetti con scroll to top
+  const goToProjectsPage = () => {
+    navigate('/projects')
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }, 100)
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -307,7 +338,9 @@ export default function About() {
                 Scarica CV
               </motion.a>
 
+              {/* BOTTONE CONTATTAMI - Portato alle card contatti */}
               <motion.button
+                onClick={goToContactCards}
                 className="px-6 py-3 bg-black/40 backdrop-blur-md border border-white/30 text-white rounded-xl font-medium flex items-center gap-2 hover:bg-black/50 transition-all duration-300 shadow-lg"
                 style={{
                   textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)'
@@ -475,7 +508,7 @@ export default function About() {
           </div>
         </motion.section>
 
-        {/* Call to Action */}
+        {/* Call to Action - BOTTONI SISTEMATI */}
         <motion.section
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -502,7 +535,9 @@ export default function About() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {/* BOTTONE INIZIAMO A COLLABORARE - Porta alle card contatti */}
               <motion.button
+                onClick={goToContactCards}
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -511,7 +546,9 @@ export default function About() {
                 Iniziamo a Collaborare
               </motion.button>
 
+              {/* BOTTONE VEDI I PROGETTI - Porta alla pagina progetti */}
               <motion.button
+                onClick={goToProjectsPage}
                 className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
