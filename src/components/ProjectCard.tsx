@@ -17,7 +17,9 @@ export default function ProjectCard({ project }: Props) {
           overflow: hidden;
           transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           transform-style: preserve-3d;
-        }
+          box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          border: 5px solid rgba(48, 134, 239, 0.2);
+          }
         
         .project-card:hover {
           transform: translateY(-8px) rotateX(5deg);
@@ -133,8 +135,8 @@ export default function ProjectCard({ project }: Props) {
           right: 0;
           bottom: 0;
           border-radius: inherit;
-          padding: 1px;
-          background: linear-gradient(135deg, rgba(48, 134, 239, 0.3), rgba(140, 130, 254, 0.3));
+          padding: 2px;
+          background: linear-gradient(135deg, rgba(48, 134, 239, 0.9), rgba(140, 130, 254, 0.3));
           mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           mask-composite: xor;
           opacity: 0;

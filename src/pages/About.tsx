@@ -127,8 +127,8 @@ export default function About() {
   ]
 
   const stats = [
-    { number: '50+', label: 'Progetti Completati', icon: Award },
-    { number: '3+', label: 'Anni Esperienza', icon: Calendar },
+    { number: '10+', label: 'Progetti Completati', icon: Award },
+    { number: '2+', label: 'Anni Esperienza', icon: Calendar },
     { number: '100%', label: 'Clienti Soddisfatti', icon: Star },
     { number: '24/7', label: 'Passione per il Codice', icon: Coffee }
   ]
@@ -306,7 +306,7 @@ export default function About() {
                 <Download size={20} />
                 Scarica CV
               </motion.a>
-              
+
               <motion.button
                 className="px-6 py-3 bg-black/40 backdrop-blur-md border border-white/30 text-white rounded-xl font-medium flex items-center gap-2 hover:bg-black/50 transition-all duration-300 shadow-lg"
                 style={{

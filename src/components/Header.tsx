@@ -242,7 +242,7 @@ export default function Header() {
             >
               <Link
                 to="/"
-                className="group text-2xl font-bold relative overflow-hidden"
+                className="group text-2xl font-bold relative overflow-hidden no-underline"
               >
                 <motion.span
                   className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent bg-size-200 bg-pos-0 group-hover:bg-pos-100 transition-all duration-700"
@@ -283,22 +283,25 @@ export default function Header() {
                   <Link
                     to={item.path}
                     className={`
-                      relative px-3 py-2 text-sm font-medium transition-all duration-300 group
+                      relative px-3 py-2 text-sm font-medium transition-all duration-300 group no-underline
                       ${location.pathname === item.path
                         ? 'text-blue-600 dark:text-blue-400'
                         : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
                       }
                     `}
+                    style={{ textDecoration: 'none' }}
                   >
                     {item.name}
 
-                    {/* Animated underline */}
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 scale-x-0 group-hover:scale-x-100 origin-left"
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    />
+                    {/* Animated underline - solo per hover quando NON è attivo */}
+                    {location.pathname !== item.path && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 scale-x-0 group-hover:scale-x-100 origin-left"
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      />
+                    )}
 
-                    {/* Active indicator */}
+                    {/* Active indicator - solo per pagina attiva */}
                     {location.pathname === item.path && (
                       <motion.div
                         layoutId="activeTab"
@@ -463,12 +466,13 @@ export default function Header() {
                       to={item.path}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`
-                        block px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300
+                        block px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 no-underline
                         ${location.pathname === item.path
                           ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
                           : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                         }
                       `}
+                      style={{ textDecoration: 'none' }}
                     >
                       {item.name}
                     </Link>

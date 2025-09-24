@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import ContactForm from '@/components/ContactForm'
 import { Seo } from '@/lib/seo'
 import { 
   Mail, 
@@ -15,7 +14,6 @@ import {
   Globe,
   Github,
   Linkedin,
-  Twitter,
   Coffee,
   Zap,
   Heart,
@@ -34,6 +32,7 @@ interface ContactMethod {
   color: string
   bgColor: string
   action: string
+  href: string
 }
 
 interface SocialLink {
@@ -46,17 +45,13 @@ interface SocialLink {
 
 export default function Contact() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [formSubmitted, setFormSubmitted] = useState(false)
   const { scrollY } = useScroll()
   
-  const y1 = useTransform(scrollY, [0, 300], [0, -50])
-  const y2 = useTransform(scrollY, [0, 300], [0, -100])
-
-  // scrollare al form
-  const scrollToForm = () => {
-    const formElement = document.getElementById('contact-form')
-    if (formElement) {
-      formElement.scrollIntoView({ 
+  // Funzione per scrollare alle card contatti
+  const scrollToContactMethods = () => {
+    const contactSection = document.getElementById('contact-methods')
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
         behavior: 'smooth', 
         block: 'center' 
       })
@@ -82,7 +77,8 @@ export default function Contact() {
       value: 'manuelbologna92@gmail.com',
       color: 'text-blue-400',
       bgColor: 'from-blue-500/20 to-cyan-500/20',
-      action: 'Invia Email'
+      action: 'Invia Email',
+      href: 'mailto:manuelbologna92@gmail.com'
     },
     {
       icon: <Phone size={28} />,
@@ -91,16 +87,18 @@ export default function Contact() {
       value: '+39 3208475452',
       color: 'text-emerald-400',
       bgColor: 'from-emerald-500/20 to-teal-500/20',
-      action: 'Chiama Ora'
+      action: 'Chiama Ora',
+      href: 'tel:+393208475452'
     },
     {
       icon: <Calendar size={28} />,
       title: 'Meeting',
       description: 'Prenota una call gratuita di 30 minuti per il tuo progetto',
-      value: 'Calendly / Google Meet',
+      value: 'Google Meet / Zoom',
       color: 'text-purple-400',
       bgColor: 'from-purple-500/20 to-pink-500/20',
-      action: 'Prenota Call'
+      action: 'Prenota Call',
+      href: 'mailto:manuelbologna92@gmail.com?subject=Richiesta Call Gratuita&body=Ciao Manuel,%0D%0A%0D%0AVorrei prenotare una call gratuita per discutere del mio progetto.%0D%0A%0D%0ADisponibilità preferita:%0D%0ADescrizione progetto:%0D%0A%0D%0AGrazie!'
     },
     {
       icon: <MessageCircle size={28} />,
@@ -109,7 +107,8 @@ export default function Contact() {
       value: '+39 3208475452',
       color: 'text-green-400',
       bgColor: 'from-green-500/20 to-lime-500/20',
-      action: 'Apri Chat'
+      action: 'Apri Chat',
+      href: 'https://wa.me/393208475452'
     }
   ]
 
@@ -127,8 +126,7 @@ export default function Contact() {
       url: 'https://www.linkedin.com/in/manuel-alfredo-bologna-67975118a/',
       color: 'hover:text-blue-600',
       description: 'Profilo professionale e network'
-    },
-    
+    }
   ]
 
   const quickFacts = [
@@ -242,10 +240,7 @@ export default function Contact() {
             variants={itemVariants}
             className="text-4xl md:text-6xl font-bold mb-8 text-blue-600 pb-6"
           >
-            Parliamo del Tuo
-            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent pb-4">
-              Progetto Digitale
-            </span>
+            Come Contattarmi
           </motion.h1>
 
           <motion.p 
@@ -254,7 +249,7 @@ export default function Contact() {
           >
             Hai un'idea brillante che vuoi trasformare in realtà digitale? 
             Sono qui per ascoltarti e aiutarti a realizzare progetti che fanno la differenza. 
-            Contattami e iniziamo subito!
+            Scegli il metodo di contatto che preferisci!
           </motion.p>
 
           {/* Quick Facts */}
@@ -280,20 +275,12 @@ export default function Contact() {
 
         {/* Contact Methods */}
         <motion.section
+          id="contact-methods"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="mb-32"
         >
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-16 text-blue-600"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Come Contattarmi
-          </motion.h2>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {contactMethods.map((method, index) => (
               <motion.div
@@ -317,46 +304,66 @@ export default function Contact() {
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">{method.description}</p>
                 <div className="text-lg font-semibold text-gray-600 mb-6">{method.value}</div>
 
-                <motion.button
-                  className={`w-full px-4 py-3 bg-gradient-to-r ${method.bgColor} border border-white/20 rounded-xl font-medium transition-all duration-300 hover:shadow-lg`}
+                <motion.a
+                  href={method.href}
+                  target={method.href.startsWith('http') ? '_blank' : '_self'}
+                  rel={method.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                  className={`block w-full px-4 py-3 bg-gradient-to-r ${method.bgColor} border border-white/20 rounded-xl font-medium transition-all duration-300 hover:shadow-lg`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={scrollToForm}
                 >
                   <span className={method.color}>{method.action}</span>
-                </motion.button>
+                </motion.a>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-32">
-          {/* Contact Form */}
+        {/* Info Grid - Centrato e ottimizzato */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto mb-32">
+          {/* Location & Hours */}
           <motion.div
-            id="contact-form"
-            className="lg:col-span-2"
+            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl">
-                  <Send size={24} className="text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-blue-600">Invia un Messaggio</h3>
-                  <p className="text-gray-600">Compila il form e ti risponderò entro 24 ore</p>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-xl">
+                <MapPin size={24} className="text-emerald-400" />
+              </div>
+              <h4 className="text-xl font-bold text-blue-600">Informazioni</h4>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <div className="font-medium text-blue-600 mb-2">Ubicazione</div>
+                <div className="text-gray-600">Piazza Armerina, Italia</div>
+                <div className="text-sm text-gray-600">Disponibile per progetti remoti</div>
+              </div>
+
+              <div>
+                <div className="font-medium text-blue-600 mb-3">Disponibilità</div>
+                <div className="space-y-3">
+                  {availability.map((slot, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                      <span className="text-gray-600 font-medium">{slot.day}</span>
+                      <span className={`text-sm px-3 py-1 rounded-full font-medium ${
+                        slot.available 
+                          ? 'bg-green-500/20 text-green-400' 
+                          : 'bg-gray-500/20 text-gray-500'
+                      }`}>
+                        {slot.hours}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              
-              <ContactForm />
             </div>
           </motion.div>
 
-          {/* Sidebar Info */}
+          {/* Social Links & Response Time */}
           <motion.div
             className="space-y-8"
             initial={{ x: 50, opacity: 0 }}
@@ -364,49 +371,13 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Location & Hours */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-lg">
-                  <MapPin size={20} className="text-emerald-400" />
-                </div>
-                <h4 className="font-bold text-blue-600">Informazioni</h4>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <div className="font-medium text-blue-600 mb-2">Ubicazione</div>
-                  <div className="text-gray-600">PIazza Armerina, Italia</div>
-                  <div className="text-sm text-gray-600">Disponibile per progetti</div>
-                </div>
-
-                <div>
-                  <div className="font-medium text-blue-600 mb-2">Disponibilità</div>
-                  <div className="space-y-2">
-                    {availability.map((slot, index) => (
-                      <div key={index} className="flex items-center justify-between">
-                        <span className="text-gray-600">{slot.day}</span>
-                        <span className={`text-sm px-2 py-1 rounded-full ${
-                          slot.available 
-                            ? 'bg-green-500/20 text-green-400' 
-                            : 'bg-gray-500/20 text-gray-500'
-                        }`}>
-                          {slot.hours}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* Social Links */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg">
-                  <Globe size={20} className="text-purple-400" />
+                <div className="p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl">
+                  <Globe size={24} className="text-purple-400" />
                 </div>
-                <h4 className="font-bold text-blue-600">Social & Portfolio</h4>
+                <h4 className="text-xl font-bold text-blue-600">Social & Portfolio</h4>
               </div>
 
               <div className="space-y-4">
@@ -416,7 +387,7 @@ export default function Contact() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 group"
+                    className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 group"
                     whileHover={{ x: 5 }}
                   >
                     <div className={`transition-colors duration-300 ${social.color}`}>
@@ -432,7 +403,7 @@ export default function Contact() {
             </div>
 
             {/* Response Time Promise */}
-            <div className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center">
+            <div className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center">
               <motion.div
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -441,24 +412,24 @@ export default function Contact() {
                 <CheckCircle size={32} className="text-green-400" />
               </motion.div>
               
-              <h4 className="font-bold text-blue-600 mb-2">Garanzia di Risposta</h4>
-              <p className="text-gray-600 text-sm mb-4">
+              <h4 className="text-xl font-bold text-blue-600 mb-3">Garanzia di Risposta</h4>
+              <p className="text-gray-600 text-sm mb-6">
                 Ti garantisco una risposta entro 24 ore per ogni richiesta. 
                 Per urgenze, contattami direttamente via WhatsApp.
               </p>
               
-              <div className="flex justify-center gap-4 text-xs">
+              <div className="flex justify-center gap-6">
                 <div className="text-center">
-                  <div className="font-bold text-blue-400">24h</div>
-                  <div className="text-gray-600">Email</div>
+                  <div className="text-lg font-bold text-blue-400">24h</div>
+                  <div className="text-xs text-gray-600">Email</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-bold text-purple-400">2h</div>
-                  <div className="text-gray-600">WhatsApp</div>
+                  <div className="text-lg font-bold text-purple-400">2h</div>
+                  <div className="text-xs text-gray-600">WhatsApp</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-bold text-cyan-400">30min</div>
-                  <div className="text-gray-600">Call</div>
+                  <div className="text-lg font-bold text-cyan-400">30min</div>
+                  <div className="text-xs text-gray-600">Call</div>
                 </div>
               </div>
             </div>
@@ -512,24 +483,26 @@ export default function Contact() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <motion.button
+                onClick={scrollToContactMethods}
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={scrollToForm}
               >
                 <Mail size={20} />
                 Inizia il Progetto
               </motion.button>
               
-              <motion.button
+              <motion.a
+                href="https://wa.me/393208475452"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 bg-white/10 border border-white/20 text-blue-600 rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={scrollToForm}
               >
                 <Coffee size={20} />
                 Prenota un Caffè Virtuale
-              </motion.button>
+              </motion.a>
             </div>
 
             {/* Final Trust Signals */}
@@ -540,11 +513,11 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Users size={16} className="text-blue-400" />
-                50+ clienti soddisfatti
+                15+ progetti completati
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Award size={16} className="text-purple-400" />
-                3+ anni esperienza
+                2+ anni esperienza
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Zap size={16} className="text-yellow-400" />

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useAnimation, useMotionValue, useTransform, useScroll } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { 
-  ArrowRight, 
-  Download, 
-  Play, 
-  Sparkles, 
-  Code2, 
-  Palette, 
+import {
+  ArrowRight,
+  Download,
+  Play,
+  Sparkles,
+  Code2,
+  Palette,
   Zap,
   Star,
   Globe,
@@ -20,16 +20,16 @@ export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0)
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
-  
+
   // Parallax effects
-  const y1 = useTransform(scrollY, [0, 300], [0, -50])
-  const y2 = useTransform(scrollY, [0, 300], [0, -100])
-  const y3 = useTransform(scrollY, [0, 300], [0, -150])
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
+  const y1 = useTransform(scrollY, [0, 500], [0, -50]) 
+  const y2 = useTransform(scrollY, [0, 500], [0, -100]) 
+  const y3 = useTransform(scrollY, [0, 500], [0, -150]) 
+  const opacity = useTransform(scrollY, [0, 850], [1, 0.2]) 
 
   const roles = [
     "Frontend Developer",
-    "React Specialist", 
+    "React Specialist",
     "UI/UX Designer",
     "Tech Innovator"
   ]
@@ -50,7 +50,7 @@ export default function Hero() {
     }, 3000)
 
     window.addEventListener('mousemove', handleMouseMove)
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       clearInterval(roleInterval)
@@ -85,7 +85,7 @@ export default function Hero() {
       y: [-20, 20, -20],
       rotate: [-5, 5, -5],
       transition: {
-        duration: 6,
+        duration: 8,
         repeat: Infinity,
         ease: "easeInOut"
       }
@@ -99,20 +99,20 @@ export default function Hero() {
       opacity: [0.3, 0.8, 0.3],
       scale: [0.8, 1.2, 0.8],
       transition: {
-        duration: 4,
+        duration: 6, 
         repeat: Infinity,
         ease: "easeInOut"
       }
     }
   }
 
-  // Generate floating particles
+  // floating particles
   const particles = Array.from({ length: 12 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
     delay: Math.random() * 2,
-    duration: 3 + Math.random() * 2,
+    duration: 4 + Math.random() * 3, 
     size: 4 + Math.random() * 8
   }))
 
@@ -126,24 +126,24 @@ export default function Hero() {
   ]
 
   return (
-    <section 
+    <section
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900"
     >
-      {/* Animated background */}
+      {/* Animated background - parallax migliorato */}
       <div className="absolute inset-0">
-        <motion.div 
-          className="absolute inset-0 opacity-30"
+        <motion.div
+          className="absolute inset-0 opacity-50"
           style={{ y: y1 }}
         >
-          <div 
+          <div
             className="w-full h-full"
             style={{
               background: `
-                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 40% 90%, rgba(6, 182, 212, 0.4) 0%, transparent 50%)
-              `
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.5) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.5) 0%, transparent 60%),
+                radial-gradient(circle at 40% 90%, rgba(6, 182, 212, 0.5) 0%, transparent 60%)
+              ` 
             }}
           />
         </motion.div>
@@ -153,7 +153,7 @@ export default function Hero() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-gradient-to-r from-blue-400/30 to-purple-400/30 blur-sm"
+          className="absolute rounded-full bg-gradient-to-r from-blue-400/40 to-purple-400/40 blur-sm"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -184,14 +184,14 @@ export default function Hero() {
           }}
           variants={floatingVariants}
           animate="animate"
-          transition={{ delay: index * 0.5 }}
+          transition={{ delay: index * 0.7 }}
           whileHover={{ scale: 1.2, rotate: 360 }}
         >
           <tech.icon size={24} className={tech.color} />
         </motion.div>
       ))}
 
-      {/* Main content */}
+      {/* Main content - opacity transform modificata per durare di più */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -204,7 +204,7 @@ export default function Hero() {
           variants={itemVariants}
           className="mb-6"
         >
-          <motion.span 
+          <motion.span
             className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-medium"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -218,7 +218,7 @@ export default function Hero() {
         <motion.div variants={itemVariants} className="mb-8">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
             <span className="block">Ciao, sono</span>
-            <motion.span 
+            <motion.span
               className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"
               style={{
                 transform: `perspective(1000px) rotateX(${mousePosition.y * 0.1}deg) rotateY(${mousePosition.x * 0.1}deg)`
@@ -227,7 +227,7 @@ export default function Hero() {
               Manuel Bologna
             </motion.span>
           </h1>
-          
+
           {/* Animated role */}
           <div className="text-2xl md:text-3xl lg:text-4xl font-semibold h-16 flex items-center justify-center">
             <motion.span
@@ -244,12 +244,12 @@ export default function Hero() {
         </motion.div>
 
         {/* Description */}
-        <motion.p 
+        <motion.p
           variants={itemVariants}
           className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed"
         >
           Trasformo idee creative in{' '}
-          <motion.span 
+          <motion.span
             className="text-blue-400 font-semibold"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
@@ -260,7 +260,7 @@ export default function Hero() {
         </motion.p>
 
         {/* CTA Buttons */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
         >
@@ -278,7 +278,7 @@ export default function Hero() {
                 animate={{ x: ['-100%', '200%'] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               />
-              
+
               <span>Esplora i Progetti</span>
               <motion.div
                 animate={{ x: [0, 5, 0] }}
@@ -301,13 +301,13 @@ export default function Hero() {
         </motion.div>
 
         {/* Stats */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
         >
           {[
-            { number: "50+", label: "Progetti Completati", icon: Code2 },
-            { number: "3+", label: "Anni di Esperienza", icon: Star },
+            { number: "10+", label: "Progetti Completati", icon: Code2 },
+            { number: "2+", label: "Anni di Esperienza", icon: Star },
             { number: "100%", label: "Clienti Soddisfatti", icon: Rocket }
           ].map((stat, index) => (
             <motion.div
@@ -321,7 +321,7 @@ export default function Hero() {
                   <stat.icon size={24} className="text-blue-400" />
                 </div>
               </div>
-              <motion.div 
+              <motion.div
                 className="text-3xl font-bold text-white mb-2"
                 initial={{ scale: 1 }}
                 whileInView={{ scale: [1, 1.1, 1] }}

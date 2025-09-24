@@ -1,7 +1,5 @@
 import React, { Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-
-// Import diretti per debug
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ProjectModal from './components/ProjectModal'

@@ -14,14 +14,14 @@ interface KpiItem {
 const items: KpiItem[] = [
   { 
     label: 'Anni di Esperienza', 
-    value: 3, 
+    value: 2, 
     icon: <Calendar size={24} />,
     color: 'text-blue-400',
     bgColor: 'from-blue-500/20 to-cyan-500/20'
   },
   { 
     label: 'Progetti Consegnati', 
-    value: 15, 
+    value: 10, 
     icon: <Award size={24} />,
     color: 'text-purple-400', 
     bgColor: 'from-purple-500/20 to-pink-500/20'

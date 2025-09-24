@@ -309,8 +309,10 @@ export default function Projects() {
                   placeholder="Cerca progetti, tecnologie..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300"
+                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-gray-400 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300"
+                  style={{color: 'rgb(75, 85, 99)' }}
                 />
+
                 {searchTerm && (
                   <motion.button
                     onClick={() => setSearchTerm('')}
@@ -355,11 +357,11 @@ export default function Projects() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as SortBy)}
-                    className="bg-transparent text-white text-sm px-3 py-2 rounded-lg focus:outline-none"
+                    className="bg-white border border-gray-400 text-blue-400 text-sm px-4 py-2 rounded-xl focus:outline-none"
                   >
-                    <option value="date" className="bg-gray-800">Data</option>
-                    <option value="name" className="bg-gray-800">Nome</option>
-                    <option value="category" className="bg-gray-800">Categoria</option>
+                    <option value="date" className="bg-white text-blue-400">Data</option>
+                    <option value="name" className="bg-white text-blue-400">Nome</option>
+                    <option value="category" className="bg-white text-blue-400">Categoria</option>
                   </select>
                   
                   <motion.button
@@ -379,7 +381,7 @@ export default function Projects() {
                     px-4 py-2 rounded-xl border transition-all duration-300 flex items-center gap-2
                     ${showFilters 
                       ? 'bg-blue-500 border-blue-400 text-white' 
-                      : 'bg-white/10 border-white/20 text-gray-300 hover:border-white/40'
+                      : 'bg-white/10 border-gray-400 text-blue-400 hover:border-gray-300'
                     }
                   `}
                   whileHover={{ scale: 1.05 }}
@@ -404,67 +406,67 @@ export default function Projects() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Category Filter */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2 flex items-center gap-2">
+                      <label className="block text-sm font-medium text-blue-400 mb-2 flex items-center gap-2">
                         <FolderOpen size={16} />
                         Categoria
                       </label>
                       <select
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-3 py-2 bg-white border border-gray-400 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value={filters.category}
                         onChange={(e) => updateParams({ category: e.target.value as Filters['category'] })}
                       >
                         {categories.map((c) => (
-                          <option key={c} value={c} className="bg-gray-800">{c}</option>
+                          <option key={c} value={c} className="bg-white text-gray-800">{c}</option>
                         ))}
                       </select>
                     </div>
 
                     {/* Year Filter */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2 flex items-center gap-2">
+                      <label className="block text-sm font-medium text-blue-400 mb-2 flex items-center gap-2">
                         <Calendar size={16} />
                         Anno
                       </label>
                       <select
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-3 py-2 bg-white border border-gray-400 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value={String(filters.year)}
                         onChange={(e) => updateParams({ year: e.target.value === 'All' ? 'All' : Number(e.target.value) })}
                       >
                         {years.map((y) => (
-                          <option key={String(y)} value={String(y)} className="bg-gray-800">{String(y)}</option>
+                          <option key={String(y)} value={String(y)} className="bg-white text-gray-800">{String(y)}</option>
                         ))}
                       </select>
                     </div>
 
                     {/* Stack Filter */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2 flex items-center gap-2">
+                      <label className="block text-sm font-medium text-blue-400 mb-2 flex items-center gap-2">
                         <Code2 size={16} />
                         Tecnologia
                       </label>
                       <select
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-3 py-2 bg-white border border-gray-400 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value={filters.stack}
                         onChange={(e) => updateParams({ stack: e.target.value as Filters['stack'] })}
                       >
                         {stacks.map((s) => (
-                          <option key={s} value={s} className="bg-gray-800">{s}</option>
+                          <option key={s} value={s} className="bg-white text-gray-800">{s}</option>
                         ))}
                       </select>
                     </div>
 
                     {/* Mode Filter */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-blue-400 mb-2">
                         Combinazione
                       </label>
                       <select
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-3 py-2 bg-white border border-gray-400 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value={filters.mode}
                         onChange={(e) => updateParams({ mode: e.target.value as Filters['mode'] })}
                       >
-                        <option value="AND" className="bg-gray-800">AND (tutti)</option>
-                        <option value="OR" className="bg-gray-800">OR (almeno uno)</option>
+                        <option value="AND" className="bg-white text-gray-800">AND (tutti)</option>
+                        <option value="OR" className="bg-white text-gray-800">OR (almeno uno)</option>
                       </select>
                     </div>
                   </div>

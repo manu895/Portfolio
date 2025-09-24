@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Seo } from '@/lib/seo'
 import { 
   Code2, 
@@ -311,23 +312,31 @@ export default function Services() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <motion.button
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
+            <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Calendar size={20} />
-              Prenota Consulenza Gratuita
-            </motion.button>
+              <Link
+                to="/contact"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
+              >
+                <Calendar size={20} />
+                Prenota Consulenza Gratuita
+              </Link>
+            </motion.div>
             
-            <motion.button
-              className="px-8 py-4 bg-white/10 border border-white/20 text-blue-600 rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
+            <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <ExternalLink size={20} />
-              Vedi Portfolio
-            </motion.button>
+              <Link
+                to="/projects"
+                className="px-8 py-4 bg-white/10 border border-white/20 text-blue-600 rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
+              >
+                <ExternalLink size={20} />
+                Vedi Portfolio
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.section>
 
@@ -352,9 +361,9 @@ export default function Services() {
               <motion.div
                 key={service.title}
                 className={`
-                  relative p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl 
+                  relative p-8 bg-white/5 backdrop-blur-sm border rounded-2xl 
                   hover:bg-white/10 transition-all duration-300 group cursor-pointer
-                  ${service.popular ? 'ring-2 ring-blue-400/50' : ''}
+                  ${activeService === index ? 'ring-2 ring-blue-400/50 border-blue-400/30' : 'border-white/10 hover:border-blue-400/30'}
                 `}
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
@@ -401,14 +410,18 @@ export default function Services() {
                   )}
                 </ul>
 
-                <motion.button
-                  className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
+                <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Scopri di Più
-                  <ArrowRight size={16} />
-                </motion.button>
+                  <Link
+                    to="/contact"
+                    className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
+                  >
+                    Scopri di Più
+                    <ArrowRight size={16} />
+                  </Link>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -434,7 +447,7 @@ export default function Services() {
             {additionalServices.map((service, index) => (
               <motion.div
                 key={service.title}
-                className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 group"
+                className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 group cursor-pointer"
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
@@ -597,23 +610,31 @@ export default function Services() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
+              <motion.div
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Mail size={20} />
-                Contattami Ora
-              </motion.button>
+                <Link
+                  to="/contact"
+                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium flex items-center gap-2 justify-center hover:shadow-lg transition-all duration-300"
+                >
+                  <Mail size={20} />
+                  Contattami Ora
+                </Link>
+              </motion.div>
               
-              <motion.button
-                className="px-8 py-4 bg-white/10 border border-white/20 text-blue-600 rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
+              <motion.div
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Calendar size={20} />
-                Prenota Call Gratuita
-              </motion.button>
+                <Link
+                  to="/contact"
+                  className="px-8 py-4 bg-white/10 border border-white/20 text-blue-600 rounded-xl font-medium flex items-center gap-2 justify-center hover:bg-white/20 transition-all duration-300"
+                >
+                  <Calendar size={20} />
+                  Prenota Call Gratuita
+                </Link>
+              </motion.div>
             </div>
 
             {/* Trust indicators */}
@@ -627,7 +648,7 @@ export default function Services() {
                 <div className="text-sm text-gray-600">Soddisfazione clienti</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-cyan-400">3+</div>
+                <div className="text-2xl font-bold text-cyan-400">2+</div>
                 <div className="text-sm text-gray-600">Anni esperienza</div>
               </div>
             </div>
