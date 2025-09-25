@@ -14,7 +14,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["node", "vite/client"]
   },
-  "include": ["src", "vite.config.ts", "env.d.ts"]
+  "include": ["src", "vite.config.ts", "env.d.ts"],
+  "exclude": ["node_modules"]
 }
